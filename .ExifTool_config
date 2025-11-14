@@ -1,0 +1,84 @@
+%Image::ExifTool::UserDefined = (
+
+  'Image::ExifTool::Exif::Main' => {
+    0xd000 => {
+      Name => 'PhotoTitle',
+      Writable => 'string',
+      WriteGroup => 'IFD0',
+      WriteAlso => {
+        'XMP-dc:Title' => '$val',       # titolo standard
+        'IPTC:ObjectName' => '$val',
+      },
+    },
+    0xd001 => {
+      Name => 'ArtistName',
+      Writable => 'string',
+      WriteGroup => 'IFD0',
+      WriteAlso => {
+        'XMP-dc:Creator' => '$val',     # autore standard
+        'IPTC:By-line' => '$val',
+      },
+    },
+    0xd002 => {
+      Name => 'ArtistCity',
+      Writable => 'string',
+      WriteGroup => 'IFD0',
+      WriteAlso => {
+        'XMP-photoshop:City' => '$val',
+        'IPTC:City' => '$val',
+      },
+    },
+    0xd003 => {
+      Name => 'ArtistCountry',
+      Writable => 'string',
+      WriteGroup => 'IFD0',
+      WriteAlso => {
+        'XMP-photoshop:Country' => '$val',
+        'IPTC:Country-PrimaryLocationName' => '$val',
+      },
+    },
+    0xd004 => {
+      Name => 'ArtistWorkURL',
+      Writable => 'string',
+      WriteGroup => 'IFD0',
+      WriteAlso => {
+        'XMP-iptcCore:CreatorWorkURL' => '$val',
+      },
+    },
+    0xd005 => {
+      Name => 'ArtistWorkEmail',
+      Writable => 'string',
+      WriteGroup => 'IFD0',
+      WriteAlso => {
+        'XMP-iptcCore:CreatorWorkEmail' => '$val',
+      },
+    },
+    0xd006 => {
+      Name => 'CopyrightsOwner',
+      Writable => 'string',
+      WriteGroup => 'IFD0',
+      WriteAlso => {
+        'XMP-dc:Rights' => '$val',
+        'IPTC:CopyrightNotice' => '$val',
+      },
+    },
+    0xd007 => {
+      Name => 'UsageTermsStatement',
+      Writable => 'string',
+      WriteGroup => 'IFD0',
+      WriteAlso => {
+        'XMP-xmpRights:UsageTerms' => '$val',
+        'XMP-dc:rights' => '$val',
+      },
+    },
+    0x013B => {
+      Name => 'Artist',
+      Writable => 'string',
+      WriteGroup => 'IFD0',
+      WriteAlso => {
+        'XMP-dc:Creator' => '$val',
+        'IPTC:By-line' => '$val',
+      },
+    },
+  },
+);
