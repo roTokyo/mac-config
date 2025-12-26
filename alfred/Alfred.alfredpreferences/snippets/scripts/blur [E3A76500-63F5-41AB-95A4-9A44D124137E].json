@@ -1,0 +1,8 @@
+{
+  "alfredsnippet" : {
+    "snippet" : "convert 01.jpg -thumbnail 24x16 -filter Gaussian -blur 0x8 -strip 01-blur.jpg",
+    "uid" : "E3A76500-63F5-41AB-95A4-9A44D124137E",
+    "name" : "blur",
+    "keyword" : "::blur1"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "alfredsnippet" : {
+    "snippet" : "exiftool -a -G1 -s -H",
+    "uid" : "36EE365A-4D2F-4C0F-9A1A-3124AB67BABE",
+    "name" : "photometa",
+    "keyword" : "::meta"
+  }
+}

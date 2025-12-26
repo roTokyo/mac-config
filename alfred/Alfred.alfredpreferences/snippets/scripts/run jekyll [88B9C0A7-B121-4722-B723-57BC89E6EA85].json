@@ -1,0 +1,8 @@
+{
+  "alfredsnippet" : {
+    "snippet" : "bundle exec jekyll serve",
+    "uid" : "88B9C0A7-B121-4722-B723-57BC89E6EA85",
+    "name" : "run jekyll",
+    "keyword" : "::serve"
+  }
+}

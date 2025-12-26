@@ -1,0 +1,8 @@
+{
+  "alfredsnippet" : {
+    "snippet" : "for file in *.jpg; do \\\n  convert \"$file\" -thumbnail 420x280 -unsharp 0.25x0.25+8+0.065 -dither None -posterize 136 -define jpeg:fancy-upsampling=off -interlace none -colorspace sRGB -strip \"${file%.jpg}-thumb.jpg\"; \\\ndone",
+    "uid" : "7A69CB34-69A0-4F66-AFC2-61EBB2CCB8B8",
+    "name" : "thumbx",
+    "keyword" : "::thumbx"
+  }
+}

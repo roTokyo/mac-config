@@ -1,0 +1,8 @@
+{
+  "alfredsnippet" : {
+    "snippet" : "magick 01.jpg \\\n  -profile \"\/System\/Library\/ColorSync\/Profiles\/sRGB Profile.icc\" \\\n  -resize 1600x1600\\> \\\n  -unsharp 0x0.55+0.7+0 \\\n  -sampling-factor 2x2 \\\n  -quality 80 \\\n  01_wa.jpg",
+    "uid" : "81D88309-B636-4FE2-8D31-376E59A9E33F",
+    "name" : "master whatsapp",
+    "keyword" : "::wts"
+  }
+}

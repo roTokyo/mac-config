@@ -1,0 +1,8 @@
+{
+  "alfredsnippet" : {
+    "snippet" : "cd && cd projects\/010 && bundle exec jekyll serve",
+    "uid" : "142D056F-8393-4042-B830-A947EB07878F",
+    "name" : "jekyll",
+    "keyword" : "::jkl"
+  }
+}

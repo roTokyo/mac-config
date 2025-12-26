@@ -1,0 +1,8 @@
+{
+  "alfredsnippet" : {
+    "snippet" : "for file in *.webp; do magick -quality 100 \"${file%.*}\".webp \"${file%.*}.jpg\"; done",
+    "uid" : "1D0246B4-740D-4F71-B216-7259495A7873",
+    "name" : "convert all webp to jpg",
+    "keyword" : ""
+  }
+}

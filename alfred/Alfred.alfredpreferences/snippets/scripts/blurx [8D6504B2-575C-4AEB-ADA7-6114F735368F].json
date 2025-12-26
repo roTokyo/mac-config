@@ -1,0 +1,8 @@
+{
+  "alfredsnippet" : {
+    "snippet" : "for file in *.jpg; do \\\n  convert \"$file\" -thumbnail 24x16 -filter Gaussian -blur 0x8 -strip \"${file%.jpg}-thumb.jpg\"; \\\ndone",
+    "uid" : "8D6504B2-575C-4AEB-ADA7-6114F735368F",
+    "name" : "blurx",
+    "keyword" : "::blurx"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "alfredsnippet" : {
+    "snippet" : "magick 01.jpg \\\n  -profile \"\/System\/Library\/ColorSync\/Profiles\/sRGB Profile.icc\" \\\n  -colorspace sRGB \\\n  -resize 2000x2000\\> \\\n  -unsharp 0x0.6+0.8+0 \\\n  -define jpeg:fancy-upsampling=off \\\n  -sampling-factor 2x2 \\\n  -quality 85 \\\n  01_web2000.jpg",
+    "uid" : "FD2C92B8-7E0E-4D7E-808C-9C2A5860DE63",
+    "name" : "master web (2000px)",
+    "keyword" : ""
+  }
+}

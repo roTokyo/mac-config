@@ -16,19 +16,20 @@ setopt inc_append_history         # Salva i comandi mentre vengono eseguiti
 setopt prompt_subst               # Abilita la sostituzione nel prompt
 autoload -U colors && colors
 
-# -------- Funzione per ramo Git ----------
+# -------- Funzione per ramo Git e ambiente Nix ----------
 git_branch_name() {
   local branch=$(git symbolic-ref HEAD 2> /dev/null | awk -F/ '{print $NF}')
   [[ -n "$branch" ]] && echo "*$branch"
 }
+
 
 # -------- Prompt personalizzato ----------
 PROMPT='
 %F{red}%n@%m%f in %F{cyan}%2~ %F{yellow}$(git_branch_name)
 %f><(((º> '
 
+
 # -------- File aggiuntivi (se esistono) ----------
-# --------           ZPROFILES           ----------
 # ********** rBenv & Ruby
 eval "$(rbenv init - zsh)"
 
@@ -50,7 +51,8 @@ export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 #    /opt/local/libexec/gnubin to your PATH, wherein non-g* prefixed symlinks are installed. In other words,
 #    /opt/local/libexec/gnubin contains GNU binaries without any prefix to the file names, so you can type telnet and
 #    get GNU telnet just as before. The (g)whois client has been removed as it duplicates the separate whois port
-export PATH="/opt/local/libexec/gnubin:$PATH"export PATH="/usr/local/opt/mozjpeg/bin:$PATH"
+export PATH="/opt/local/libexec/gnubin:$PATH"
+export PATH="/usr/local/opt/mozjpeg/bin:$PATH"
 
 export PATH="/usr/local/opt/python@3.13/libexec/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
@@ -83,7 +85,7 @@ alias check='sudo lsof -i:80'
 alias show='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder'
 alias hide='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder'
 
-alias imgproc='/Users/ro/Desktop/Projects/roMacSetup/zz-bin/zz-imageForBlog.sh'
+alias imgproc='/Users/ro/Projects/roTokyo-git/zz-imageForBlog.sh'
 
 function mta() {
   exiftool -a -s -H -G1 -sort "$@"
@@ -97,3 +99,5 @@ function mt() {
 echo -e "\033[0;39mKernel Information: \033[0;31m$(uname -smr)"
 echo -e "\033[0;39mUptime: \033[0;31m$(uptime | sed 's/.*up *//; s/,.*//')"
 echo -e "\033[0;39mServer time is: \033[0;31m$(date)"
+
+. "$HOME/.local/bin/env"

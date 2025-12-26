@@ -1,0 +1,8 @@
+{
+  "alfredsnippet" : {
+    "snippet" : "convert 01.jpg -thumbnail 420x280 -unsharp 0.25x0.25+8+0.065 -dither None -posterize 136 -define jpeg:fancy-upsampling=off -interlace none -colorspace sRGB -strip 01-thumb.jpg",
+    "uid" : "F239087D-8FBD-4D7A-B162-690D89255CF3",
+    "name" : "thumb",
+    "keyword" : "::thumb1"
+  }
+}

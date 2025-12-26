@@ -1,0 +1,8 @@
+{
+  "alfredsnippet" : {
+    "snippet" : "magick 01.tiff \\\n  -profile \"\/System\/Library\/ColorSync\/Profiles\/sRGB Profile.icc\" \\\n  -sampling-factor 1x1 \\\n  -quality 97 \\\n  -define jpeg:preserve-settings=true \\\n  01.jpg",
+    "uid" : "119B941F-2FFF-4BFA-9EEB-CABDF3B0283B",
+    "name" : "da .tiff a .jpg",
+    "keyword" : ""
+  }
+}

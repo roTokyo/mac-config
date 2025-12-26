@@ -1,0 +1,8 @@
+{
+  "alfredsnippet" : {
+    "snippet" : " bundle exec jekyll build --config _config.yml,_config_prod.yml",
+    "uid" : "7A88FC93-43E1-4FB1-9A06-4809E2214175",
+    "name" : "build jekyll",
+    "keyword" : "::build"
+  }
+}
