@@ -1,0 +1,36 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Directories created by macOS
+.DocumentRevisions-V100/
+.fseventsd/
+.Spotlight-V100/
+.TemporaryItems/
+.Trashes/
+.VolumeIcon.icns
+
+# Thumbnails
+.thumbnails/
+
+# Xcode
+DerivedData/
+*.xcuserstate
+
+# Visual Studio Code
+.vscode/
+
+# Jekyll
+.sass-cache
+
+# Archives / temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Videos
+*.mp4

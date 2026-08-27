@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string></string>
+	<key>category</key>
+	<string>Productivity</string>
+	<key>connections</key>
+	<dict>
+		<key>621C46BC-52B3-4AD0-B140-DD579CA3CFF8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>E73FD5B7-5DF3-43D1-AC44-494D9F8B9F62</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string></string>
+	<key>description</key>
+	<string></string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Cerca con Safari</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>#!/bin/bash
+
+query=$(pbpaste)
+
+if [[ -z "$query" ]]; then
+    exit 0
+fi
+
+full_prompt="Traduci in italiano il seguente testo: $query"
+
+echo "$full_prompt" | pbcopy
+
+
+osascript &lt;&lt;'EOF'
+tell application "Safari"
+    activate
+    
+    set foundTab to false
+    
+    repeat with w in windows
+        repeat with t in tabs of w
+            if URL of t contains "chatgpt.com" then
+                set current tab of w to t
+                set index of w to 1
+                set foundTab to true
+                exit repeat
+            end if
+        end repeat
+        
+        if foundTab then exit repeat
+    end repeat
+    
+    if not foundTab then
+        make new document with properties {URL:"https://chatgpt.com"}
+        delay 3
+    end if
+end tell
+
+
+tell application "System Events"
+    delay 1
+    
+    tell process "Safari"
+        keystroke "v" using command down
+        delay 0.2
+        key code 36
+    end tell
+end tell
+EOF</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>E73FD5B7-5DF3-43D1-AC44-494D9F8B9F62</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>2</integer>
+				<key>focusedappvariable</key>
+				<false/>
+				<key>focusedappvariablename</key>
+				<string></string>
+				<key>hotkey</key>
+				<integer>5</integer>
+				<key>hotmod</key>
+				<integer>1310720</integer>
+				<key>hotstring</key>
+				<string>G</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>621C46BC-52B3-4AD0-B140-DD579CA3CFF8</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>621C46BC-52B3-4AD0-B140-DD579CA3CFF8</key>
+		<dict>
+			<key>xpos</key>
+			<real>30</real>
+			<key>ypos</key>
+			<real>140</real>
+		</dict>
+		<key>E73FD5B7-5DF3-43D1-AC44-494D9F8B9F62</key>
+		<dict>
+			<key>xpos</key>
+			<real>210</real>
+			<key>ypos</key>
+			<real>140</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
+	<key>webaddress</key>
+	<string></string>
+</dict>
+</plist>
