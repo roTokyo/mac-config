@@ -2,5 +2,5 @@
 # Edit at your own risk.
 # <hostname>	<port>	<incl. subdomains>	<created>	<max-age>
 www.timeout.com	0	1	1758375474	31536000
-note.com	0	0	1737651367	31536000
-otakinen-museum.note.jp	0	0	1737651368	7776000
+note.com	0	0	1787965729	31536000
+otakinen-museum.note.jp	0	0	1787965729	63072000
