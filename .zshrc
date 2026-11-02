@@ -38,21 +38,8 @@ export NVM_DIR="$HOME/.nvm"
 
 # ********** Brew
 eval "$(/usr/local/bin/brew shellenv)"
-export HOMEBREW_NO_AUTO_UPDATE=0
+export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_NO_INSTALL_CLEANUP=1
-
-# ********** Mac Port
-export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-
-# ********** NOTE
-#  inetutils has the following notes:
-#    All clients are now installed with the "g" prefix. This means that you'll now, for example, find GNU telnet at
-#    /opt/local/bin/gtelnet. If you dislike typing gtelnet, you can create a shell alias or you can add
-#    /opt/local/libexec/gnubin to your PATH, wherein non-g* prefixed symlinks are installed. In other words,
-#    /opt/local/libexec/gnubin contains GNU binaries without any prefix to the file names, so you can type telnet and
-#    get GNU telnet just as before. The (g)whois client has been removed as it duplicates the separate whois port
-export PATH="/opt/local/libexec/gnubin:$PATH"
-export PATH="/usr/local/opt/mozjpeg/bin:$PATH"
 
 export PATH="/usr/local/opt/python@3.13/libexec/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
@@ -115,106 +102,3 @@ bindkey '^ ' autosuggest-accept
 bindkey '^[^[[A' history-search-backward
 # Alt + Freccia Giù per scorrere la cronologia del comando
 bindkey '^[^[[B' history-search-forward
-
-check_title() {
-
-    if [ -z "$1" ]; then
-        echo "Uso: check_title nome_immagine.jpg"
-        return 1
-    fi
-
-    local file="$1"
-
-    # Estrae il primo titolo valido trovato da ExifTool
-    local titolo=$(exiftool -s3 -Title -ObjectName -ImageDescription "$file" 2>/dev/null | head -n 1)
-
-    if [ -n "$titolo" ]; then
-
-        echo "Presente: Sì"
-        echo "Titolo attuale: $titolo"
-        echo
-
-        # Chiede all'utente se vuole cambiare il titolo
-        printf "Vuoi cambiare il titolo? (s/n): "
-        read -r risposta
-
-        if [[ "$risposta" =~ ^[Ss]$ ]]; then
-
-            printf "Inserisci il nuovo titolo (lascia VUOTO per cancellarlo): "
-            read -r nuovo_titolo
-
-            if [ -n "$nuovo_titolo" ]; then
-
-                echo "Aggiornamento in corso..."
-
-                exiftool -overwrite_original \
-                        -Title="$nuovo_titolo" \
-                        -ObjectName="$nuovo_titolo" \
-                        -XMP-dc:Title="$nuovo_titolo" \
-                        -ImageDescription="$nuovo_titolo" "$file"
-
-                echo "Titolo aggiornato con successo!"
-
-            else
-
-                # Gestione della cancellazione completa
-                printf "Hai lasciato il campo vuoto. Vuoi CANCELLARE definitivamente il titolo? (s/n): "
-                read -r conferma_cancella
-
-                if [[ "$conferma_cancella" =~ ^[Ss]$ ]]; then
-
-                    echo "Rimozione del titolo in corso..."
-
-                    exiftool -overwrite_original \
-                            -Title= \
-                            -ObjectName= \
-                            -XMP-dc:Title= \
-                            -ImageDescription= "$file"
-
-                    echo "Titolo rimosso con successo!"
-
-                else
-                    echo "Operazione annullata: nessuna modifica effettuata."
-                fi
-            fi
-
-        else
-            echo "Operazione annullata: nessuna modifica effettuata."
-        fi
-
-    else
-
-        echo "Presente: No"
-        echo
-
-        # Chiede se si vuole aggiungere un titolo
-        printf "Vuoi aggiungere un titolo? (s/n): "
-        read -r risposta
-
-        if [[ "$risposta" =~ ^[Ss]$ ]]; then
-
-            printf "Inserisci il titolo: "
-            read -r nuovo_titolo
-
-            if [ -n "$nuovo_titolo" ]; then
-
-                echo "Aggiornamento in corso..."
-
-                exiftool -overwrite_original \
-                        -Title="$nuovo_titolo" \
-                        -ObjectName="$nuovo_titolo" \
-                        -XMP-dc:Title="$nuovo_titolo" \
-                        -ImageDescription="$nuovo_titolo" "$file"
-
-                echo "Titolo aggiunto con successo!"
-
-            else
-                echo "Nessun titolo inserito: nessuna modifica effettuata."
-            fi
-
-        else
-            echo "Operazione annullata: nessuna modifica effettuata."
-        fi
-
-    fi
-}
