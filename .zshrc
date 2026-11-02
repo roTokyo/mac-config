@@ -30,7 +30,7 @@ PROMPT='%F{red}%n@%m%f in %F{cyan}%2~ %F{yellow}$(git_branch_name)
 
 # -------- File aggiuntivi (se esistono) ----------
 # ********** rBenv & Ruby
-eval "$(rbenv init - zsh)"
+command -v rbenv >/dev/null && eval "$(rbenv init - zsh)"
 
 # ********** NVM
 export NVM_DIR="$HOME/.nvm"
@@ -56,7 +56,7 @@ export PATH="/usr/local/opt/mozjpeg/bin:$PATH"
 
 export PATH="/usr/local/opt/python@3.13/libexec/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
-export PATH="$PATH:$(go env GOPATH)/bin"
+command -v go >/dev/null && export PATH="$PATH:$(go env GOPATH)/bin"
 
 # ********** Aliases in uso **********
 
@@ -86,7 +86,7 @@ alias check='sudo lsof -i:80'
 alias show='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder'
 alias hide='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder'
 
-alias imgproc='/Users/kazuro/zsh_files/zz-imageForBlog_v0.03.zsh'
+alias imgproc='$HOME/zsh_files/zz-imageForBlog_v0.03.zsh'
 
 function exif() {
   exiftool -a -s -H -G1 -sort "$@"
@@ -107,9 +107,9 @@ ZSH_AUTOSUGGEST_MIN_SIZE=3
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=242"
 
 
-. "$HOME/.local/bin/env"
+[ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
 
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+[ -r /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh ] && source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 bindkey '^ ' autosuggest-accept
 # Alt + Freccia Su per scorrere la cronologia del comando
 bindkey '^[^[[A' history-search-backward
