@@ -1,0 +1,85 @@
+#!/usr/bin/osascript -l JavaScript
+
+function envVar(varName) {
+  return $.NSProcessInfo
+    .processInfo
+    .environment
+    .objectForKey(varName).js
+}
+
+function diskUtilPlist(action, diskDesc) {
+  const task = $.NSTask.alloc.init
+  const stdout = $.NSPipe.pipe
+
+  task.executableURL = $.NSURL.fileURLWithPath("/usr/sbin/diskutil")
+  task.arguments = [action, "-plist"].concat(diskDesc)
+  task.standardOutput = stdout
+  task.launchAndReturnError(false)
+
+  const dataOut = stdout.fileHandleForReading.readDataToEndOfFileAndReturnError(false)
+  const stringOut = $.NSString.alloc.initWithDataEncoding(dataOut, $.NSUTF8StringEncoding).js
+
+  // Use temporary plist to parse info as JSON
+  const tmpPlist = `/tmp/${envVar("alfred_workflow_bundleid")}.plist`
+  $(stringOut).writeToFileAtomicallyEncodingError(tmpPlist, true, $.NSUTF8StringEncoding, undefined)
+  return Application("System Events").propertyListFiles.byName(tmpPlist).contents.value()
+}
+
+function humanFileSize(bytes) {
+  if (bytes === 0) return "0 B"
+
+  const units = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
+  const minPower = 0
+  const maxPower = units.length - 1
+  const rawPower = Math.floor(Math.log(bytes) / Math.log(1024))
+  const power = Math.min(Math.max(rawPower, minPower), maxPower)
+
+  return parseInt((bytes / 1000 ** power)) + ' ' + units[power]
+}
+
+function run() {
+  const listUnmounted = envVar("list_unmounted") === "1"
+
+  const parsedPartitions = diskUtilPlist("list", ["external", "physical"])
+    .AllDisksAndPartitions
+    .flatMap(disk => disk.Partitions || disk)
+    .flatMap(partition => {
+      // Ignore irrelevant partitions
+      if (partition.Content === "Microsoft Reserved") return []
+      if (partition.Content === "EFI") return []
+
+      // Special handling for APFS partitions,
+      // which map from a physical device to a different synthesized device
+      if (partition.Content === "Apple_APFS") {
+        const refDisk = diskUtilPlist("info", partition.DeviceIdentifier).APFSContainerReference
+        return diskUtilPlist("list", refDisk)
+          .AllDisksAndPartitions
+          .flatMap(parts => parts.APFSVolumes)
+          .filter(volumes => !volumes.OSInternal)
+      }
+
+      // Other file systems
+      return partition
+    })
+
+  // Filter for mounted or unmounted
+  const listPartitions = listUnmounted ?
+    parsedPartitions.filter(partition => partition.MountPoint) :
+    parsedPartitions.filter(partition => !partition.MountPoint)
+
+  // When no relevant partitions found
+  if (listPartitions.length === 0) return JSON.stringify({ items: [{
+    title: `No ${listUnmounted ? "Mounted" : "Unmounted"} Disk Partitions Found`,
+    valid: false
+  }]})
+
+  // Return JSON
+  const sfItems = listPartitions.map(partition => ({
+    variables: { volume_name: partition.VolumeName },
+    title: partition.VolumeName,
+    subtitle: humanFileSize(partition.Size),
+    arg: partition.DeviceIdentifier
+  }))
+
+  return JSON.stringify({ items: sfItems })
+}

@@ -1,0 +1,57 @@
+tap "homebrew/core"
+tap "sass/sass", trusted: { formulae: ["sass"] }
+# Manage your dotfiles across multiple diverse machines, securely
+brew "chezmoi"
+# Perl lib for reading and writing EXIF metadata
+brew "exiftool"
+# OCR (Optical Character Recognition) engine
+brew "tesseract"
+# Distributed revision control system
+brew "git"
+# Tools and libraries to manipulate images in select formats
+brew "imagemagick"
+# Utility to optimize JPEG files
+brew "jpegoptim"
+# Manage multiple Node.js versions
+brew "nvm"
+# Adds an OCR text layer to scanned PDF files
+brew "ocrmypdf"
+# Ruby version manager
+brew "rbenv"
+# Utility that provides fast incremental file transfer
+brew "rsync"
+# Enables extra languages support for Tesseract
+brew "tesseract-lang"
+# Sends magic packets to wake up network-devices
+brew "wakeonlan"
+# Internet file retriever
+brew "wget"
+# Fish-like fast/unobtrusive autosuggestions for zsh
+brew "zsh-autosuggestions"
+# Memory training application
+cask "anki"
+# Application uninstaller
+cask "appcleaner"
+# Tool to prevent the system from going into sleep mode
+cask "keepingyouawake"
+# Verify system files structure, run miscellaneous maintenance and more
+cask "onyx"
+# Binary releases of VS Code without MS branding/telemetry/licensing
+cask "vscodium"
+vscode "aaron-bond.better-comments"
+vscode "anteprimorac.html-end-tag-labels"
+vscode "ecmel.vscode-html-css"
+vscode "esbenp.prettier-vscode"
+vscode "formulahendry.auto-close-tag"
+vscode "formulahendry.auto-rename-tag"
+vscode "github.vscode-pull-request-github"
+vscode "oderwat.indent-rainbow"
+vscode "ritwickdey.liveserver"
+vscode "streetsidesoftware.code-spell-checker"
+vscode "streetsidesoftware.code-spell-checker-italian"
+vscode "vincaslt.highlight-matching-tag"
+vscode "wayou.vscode-todo-highlight"
+vscode "yzane.markdown-pdf"
+vscode "yzhang.markdown-all-in-one"
+npm "corepack"
+npm "n8n"
